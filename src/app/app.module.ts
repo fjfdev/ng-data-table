@@ -6,6 +6,7 @@ import { createCustomElement } from '@angular/elements';
 import {
   MatButtonModule,
   MatCardModule,
+  MatIconModule,
   MatPaginatorModule,
   MatTableModule
 } from '@angular/material';
@@ -23,11 +24,12 @@ import { MagicCellComponent } from './magic-cell/magic-cell.component';
     BrowserModule,
     MatButtonModule,
     MatCardModule,
+    MatIconModule,
     MatPaginatorModule,
     MatTableModule
   ],
   entryComponents: [DataTableComponent],
-  bootstrap: [DataTableComponent]// Keep only for development
+  // bootstrap: [DataTableComponent]// Keep only for development
 })
 export class AppModule {
   constructor(private injector: Injector) {

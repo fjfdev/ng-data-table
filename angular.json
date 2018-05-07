@@ -118,5 +118,15 @@
       }
     }
   },
-  "defaultProject": "ng-data-table"
+  "defaultProject": "ng-data-table",
+  "schematics": {
+    "@schematics/angular:component": {
+      "prefix": "app",
+      "styleext": "scss"
+    },
+    "@schematics/angular:directive": {
+      "prefix": "app"
+    }
+  }
+
 }

@@ -3,7 +3,9 @@
 
     <ng-container [matColumnDef]="column.name" *ngFor="let column of columnsInfo.columns">
       <mat-header-cell *matHeaderCellDef> {{ column.displayName }}</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element[column.name]}} </mat-cell>
+      <mat-cell *matCellDef="let element">
+        <app-magic-cell [cellValue]="element[column.name]"></app-magic-cell>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
