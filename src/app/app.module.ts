@@ -1,16 +1,39 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, Injector } from '@angular/core';
+import { createCustomElement } from '@angular/elements';
 
-import { AppComponent } from './app.component';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatPaginatorModule,
+  MatTableModule
+} from '@angular/material';
+
+import { DataTableComponent } from './data-table/data-table.component';
+import { MagicCellComponent } from './magic-cell/magic-cell.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    DataTableComponent,
+    MagicCellComponent
   ],
   imports: [
-    BrowserModule
+    BrowserAnimationsModule,
+    BrowserModule,
+    MatButtonModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  entryComponents: [DataTableComponent],
+  bootstrap: [DataTableComponent]// Keep only for development
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {
+    const customElement = createCustomElement(DataTableComponent, {injector});
+    customElements.define('data-table', customElement);
+  }
+
+  ngDoBootstrap() {}
+}

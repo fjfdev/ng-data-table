@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-table #dataTable [dataSource]="dataSource">
+
+    <ng-container [matColumnDef]="column.name" *ngFor="let column of columnsInfo.columns">
+      <mat-header-cell *matHeaderCellDef> {{ column.displayName }}</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[column.name]}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [length]="paginatorInfo.length"
+                 [pageSize]="paginatorInfo.pageSize"
+                 [pageSizeOptions]="paginatorInfo.pageSizeOptions">
+  </mat-paginator>
+</mat-card>
