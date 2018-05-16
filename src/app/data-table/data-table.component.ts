@@ -34,9 +34,9 @@ export class DataTableComponent implements OnInit {
   initColumns(): void {
     this.columnsInfo = {
       columns: [
-        {name: 'column1', displayName: 'Order'},
-        {name: 'column2', displayName: 'Name'},
-        {name: 'column3', displayName: 'Weight'},
+        {name: 'column1', displayName: 'Order', parseAs: 'string'},
+        {name: 'column2', displayName: 'Name', parseAs: 'string'},
+        {name: 'column3', displayName: 'Weight', parseAs: 'string'},
       ],
       columnLastIndex: 3
     };
@@ -79,7 +79,7 @@ export class DataTableComponent implements OnInit {
 
   addColumn(columnName: string) {
     const newIndex = this.columnsInfo.columnLastIndex;
-    const newColumn = {name: 'column${newIndex}', displayName: columnName};
+    const newColumn = {name: 'column${newIndex}', displayName: columnName, parseAs: 'string'};
     this.columnsInfo.columns.push(newColumn);
     this.columnsInfo.columnLastIndex++;
   }

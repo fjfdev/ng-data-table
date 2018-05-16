@@ -68,6 +68,8 @@ import 'core-js/es7/reflect';
  */
 // (window as any).__Zone_enable_cross_context_check = true;
 
+import '@webcomponents/custom-elements/custom-elements.min';
+
 import '@webcomponents/custom-elements/src/native-shim';
 
 /***************************************************************************************************

@@ -2,7 +2,9 @@
   <mat-table #dataTable [dataSource]="dataSource">
 
     <ng-container [matColumnDef]="column.name" *ngFor="let column of columnsInfo.columns">
-      <mat-header-cell *matHeaderCellDef> {{ column.displayName }}</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <app-magic-cell [cellValue]="column.displayName"></app-magic-cell>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <app-magic-cell [cellValue]="element[column.name]"></app-magic-cell>
       </mat-cell>

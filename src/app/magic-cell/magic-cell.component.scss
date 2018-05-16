@@ -1,0 +1,8 @@
+.magic-input {
+  border: 0px;
+  padding: 7px;
+
+  &:disabled {
+    background-color: transparent;
+  }
+}

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
+import { FormsModule } from '@angular/forms';
 
 import {
   MatButtonModule,
@@ -22,6 +23,7 @@ import { MagicCellComponent } from './magic-cell/magic-cell.component';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    FormsModule,
     MatButtonModule,
     MatCardModule,
     MatIconModule,
@@ -29,7 +31,7 @@ import { MagicCellComponent } from './magic-cell/magic-cell.component';
     MatTableModule
   ],
   entryComponents: [DataTableComponent],
-  // bootstrap: [DataTableComponent]// Keep only for development
+  bootstrap: [DataTableComponent]// Keep only for development
 })
 export class AppModule {
   constructor(private injector: Injector) {

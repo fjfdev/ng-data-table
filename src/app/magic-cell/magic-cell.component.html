@@ -1,14 +1,23 @@
 <div (mouseenter)="toggleEdit()" (mouseleave)="toggleEdit()">
-  <input type="text" [value]="cellValue" disabled/>
 
-  <button mat-icon-button *ngIf="showEdit" (click)="editCell()">
+  <span *ngIf="!isEditing">{{ cellValue }}</span>
+  <input *ngIf="isEditing" class="magic-input" placeholder="" type="text" [(ngModel)]="cellValue" [disabled]="!isEditing"/>
+
+  <button mat-icon-button
+          *ngIf="showEdit"
+          (click)="editCell()">
     <mat-icon>edit</mat-icon>
   </button>
 
-  <button mat-icon-button (click)="acceptEditCell()" *ngIf="isEditing">
+  <button mat-icon-button
+          (click)="acceptEditCell()"
+          *ngIf="isEditing">
     <mat-icon>done</mat-icon>
   </button>
-  <button mat-icon-button (click)="closeEditCell()" *ngIf="isEditing">
+
+  <button mat-icon-button
+          (click)="closeEditCell()"
+          *ngIf="isEditing">
     <mat-icon>close</mat-icon>
   </button>
 </div>
