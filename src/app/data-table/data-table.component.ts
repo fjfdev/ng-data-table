@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import {
   MatPaginator,
-  MatTableDataSource
+  MatTableDataSource,
 } from '@angular/material';
 
 import { Paginator } from './paginator.interface';
@@ -34,9 +34,9 @@ export class DataTableComponent implements OnInit {
   initColumns(): void {
     this.columnsInfo = {
       columns: [
-        {name: 'column1', displayName: 'Order', parseAs: 'string'},
-        {name: 'column2', displayName: 'Name', parseAs: 'string'},
-        {name: 'column3', displayName: 'Weight', parseAs: 'string'},
+        {name: 'order', displayName: 'Order', parseAs: 'string'},
+        {name: 'name', displayName: 'Name', parseAs: 'string'},
+        {name: 'weight', displayName: 'Weight', parseAs: 'string'},
       ],
       columnLastIndex: 3
     };
@@ -45,26 +45,26 @@ export class DataTableComponent implements OnInit {
 
   fillData(): void {
     this.dataSource = new MatTableDataSource([
-      {column1: '1', column2: 'Hydrogen', column3: '1.0079'},
-      {column1: '2', column2: 'Helium', column3: '4.0026'},
-      {column1: '3', column2: 'Lithium', column3: '6.941'},
-      {column1: '4', column2: 'Beryllium', column3: '9.0122'},
-      {column1: '5', column2: 'Boron', column3: '10.811'},
-      {column1: '6', column2: 'Carbon', column3: '12.0107'},
-      {column1: '7', column2: 'Nitrogen', column3: '14.0067'},
-      {column1: '8', column2: 'Oxygen', column3: '15.9994'},
-      {column1: '9', column2: 'Fluorine', column3: '18.9984'},
-      {column1: '10', column2: 'Neon', column3: '20.1797'},
-      {column1: '11', column2: 'Sodium', column3: '22.9897'},
-      {column1: '12', column2: 'Magnesium', column3: '24.305'},
-      {column1: '13', column2: 'Aluminum', column3: '26.9815'},
-      {column1: '14', column2: 'Silicon', column3: '28.0855'},
-      {column1: '15', column2: 'Phosphorus', column3: '30.9738'},
-      {column1: '16', column2: 'Sulfur', column3: '32.065'},
-      {column1: '17', column2: 'Chlorine', column3: '35.453'},
-      {column1: '18', column2: 'Argon', column3: '39.948'},
-      {column1: '19', column2: 'Potassium', column3: '39.0983'},
-      {column1: '20', column2: 'Calcium', column3: '40.078'}
+      {order: '1', name: 'Hydrogen', weight: '1.0079'},
+      {order: '2', name: 'Helium', weight: '4.0026'},
+      {order: '3', name: 'Lithium', weight: '6.941'},
+      {order: '4', name: 'Beryllium', weight: '9.0122'},
+      {order: '5', name: 'Boron', weight: '10.811'},
+      {order: '6', name: 'Carbon', weight: '12.0107'},
+      {order: '7', name: 'Nitrogen', weight: '14.0067'},
+      {order: '8', name: 'Oxygen', weight: '15.9994'},
+      {order: '9', name: 'Fluorine', weight: '18.9984'},
+      {order: '10', name: 'Neon', weight: '20.1797'},
+      {order: '11', name: 'Sodium', weight: '22.9897'},
+      {order: '12', name: 'Magnesium', weight: '24.305'},
+      {order: '13', name: 'Aluminum', weight: '26.9815'},
+      {order: '14', name: 'Silicon', weight: '28.0855'},
+      {order: '15', name: 'Phosphorus', weight: '30.9738'},
+      {order: '16', name: 'Sulfur', weight: '32.065'},
+      {order: '17', name: 'Chlorine', weight: '35.453'},
+      {order: '18', name: 'Argon', weight: '39.948'},
+      {order: '19', name: 'Potassium', weight: '39.0983'},
+      {order: '20', name: 'Calcium', weight: '40.078'}
     ]);
   }
 
