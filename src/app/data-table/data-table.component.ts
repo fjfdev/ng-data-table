@@ -4,11 +4,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import {
-  MatPaginator,
   MatTableDataSource,
 } from '@angular/material';
 
-import { Paginator } from './paginator.interface';
 import { ColumnsInfo } from './columnsInfo.interface';
 import { Column } from './column.interface';
 
@@ -25,13 +23,10 @@ export class DataTableComponent implements OnInit {
 
   columnsInfo: ColumnsInfo;
   displayedColumns: Array<string>;
-  paginatorInfo: Paginator;
   dataSource;
   tableSelection;
 
   columnsInfo$: Observable<ColumnsInfo>;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private store: Store<AppStateInterface>) {
     this.columnsInfo$ = this.store.select('columnsInfo');
@@ -41,7 +36,6 @@ export class DataTableComponent implements OnInit {
     this.initColumns();
     this.fillData();
     this.initMultiSelect();
-    this.setPaginator();
   }
 
   initColumns(): void {
@@ -79,15 +73,6 @@ export class DataTableComponent implements OnInit {
       {order: '19', name: 'Potassium', weight: '39.0983'},
       {order: '20', name: 'Calcium', weight: '40.078'}
     ]);
-  }
-
-  setPaginator(): void {
-    this.paginatorInfo = {
-      length: 100,
-      pageSize: 5,
-      pageSizeOptions: [5, 10, 25, 100]
-    };
-    this.dataSource.paginator = this.paginator;
   }
 
   initMultiSelect(): void {
