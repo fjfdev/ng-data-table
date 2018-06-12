@@ -3,3 +3,9 @@
 @include mat-core();
 
 @import '../styles/_icons.scss';
+
+.table-actions {
+  button {
+    margin: 0px 10px;
+  }
+}

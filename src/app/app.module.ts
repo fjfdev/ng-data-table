@@ -4,16 +4,23 @@ import { NgModule, Injector } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { FormsModule } from '@angular/forms';
 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import {
   MatButtonModule,
   MatCardModule,
+  MatCheckboxModule,
   MatIconModule,
   MatPaginatorModule,
-  MatTableModule
+  MatTableModule,
+  MatToolbarModule
 } from '@angular/material';
 
 import { DataTableComponent } from './data-table/data-table.component';
 import { MagicCellComponent } from './magic-cell/magic-cell.component';
+
+import { StoreModule } from '@ngrx/store';
+import { columnsInfoReducer } from './columnsInfo.reducer';
 
 @NgModule({
   declarations: [
@@ -23,12 +30,18 @@ import { MagicCellComponent } from './magic-cell/magic-cell.component';
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    FlexLayoutModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatIconModule,
+    MatToolbarModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    StoreModule.forRoot({
+      columnsInfo: columnsInfoReducer
+    })
   ],
   entryComponents: [DataTableComponent],
   bootstrap: [DataTableComponent]// Keep only for development

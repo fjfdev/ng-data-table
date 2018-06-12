@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import {
   MatPaginator,
@@ -7,6 +10,10 @@ import {
 
 import { Paginator } from './paginator.interface';
 import { ColumnsInfo } from './columnsInfo.interface';
+import { Column } from './column.interface';
+
+import { AppStateInterface } from '../app-state.interface';
+import * as ColumnsInfoActions from '../columnsInfo.actions';
 
 @Component({
   selector: 'app-data-table',
@@ -20,14 +27,20 @@ export class DataTableComponent implements OnInit {
   displayedColumns: Array<string>;
   paginatorInfo: Paginator;
   dataSource;
+  tableSelection;
+
+  columnsInfo$: Observable<ColumnsInfo>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() { }
+  constructor(private store: Store<AppStateInterface>) {
+    this.columnsInfo$ = this.store.select('columnsInfo');
+  }
 
   ngOnInit() {
     this.initColumns();
     this.fillData();
+    this.initMultiSelect();
     this.setPaginator();
   }
 
@@ -77,14 +90,51 @@ export class DataTableComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  addColumn(columnName: string) {
-    const newIndex = this.columnsInfo.columnLastIndex;
-    const newColumn = {name: 'column${newIndex}', displayName: columnName, parseAs: 'string'};
-    this.columnsInfo.columns.push(newColumn);
-    this.columnsInfo.columnLastIndex++;
+  initMultiSelect(): void {
+    const initalSelection = [];
+    const allowMultiSelect = true;
+    this.tableSelection = new SelectionModel(allowMultiSelect, initalSelection);
   }
 
-  removeColumn(columnIndex: number) {
-    this.columnsInfo.columns.splice(columnIndex, 1);
+  areAllRowsSelected() {
+    const numSelected = this.tableSelection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
+
+  areRowsSelected() {
+    const areRows = this.tableSelection.selected.length > 0;
+    return areRows;
+  }
+
+  masterToggle() {
+    this.areAllRowsSelected() ?
+      this.tableSelection.clear() :
+      this.dataSource.data.forEach(row => this.tableSelection.select(row));
+  }
+
+  isCheckboxChecked() {
+    return this.tableSelection.hasValue() && this.areAllRowsSelected();
+  }
+
+  isCheckboxIntermediate() {
+    return this.tableSelection.hasValue() && !this.areAllRowsSelected();
+  }
+
+  addColumn(columnName?: string) {
+    // const newIndex = this.columnsInfo.columnLastIndex;
+    // const newColumn = {name: 'column${newIndex}', displayName: columnName, parseAs: 'string'};
+    // this.columnsInfo.columns.push(newColumn);
+    // this.columnsInfo.columnLastIndex++;
+    const newColumn: Column = {name: 'test', displayName: 'test', parseAs: 'string'};
+    this.store.dispatch(new ColumnsInfoActions.AddColumn(newColumn));
+  }
+
+  removeColumn(columnIndex?: number) {
+    // this.columnsInfo.columns.splice(columnIndex, 1);
+    this.store.dispatch(new ColumnsInfoActions.RemoveColumn('one'));
+
+    // this.store.dispatch({type: 'REMOVE_COLUMN'});
+  }
+
 }
