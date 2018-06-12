@@ -11,6 +11,7 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatIconModule,
+  MatPaginatorModule,
   MatTableModule,
   MatToolbarModule
 } from '@angular/material';
@@ -36,6 +37,7 @@ import { columnsInfoReducer } from './columnsInfo.reducer';
     MatCheckboxModule,
     MatIconModule,
     MatToolbarModule,
+    MatPaginatorModule,
     MatTableModule,
     StoreModule.forRoot({
       columnsInfo: columnsInfoReducer

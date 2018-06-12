@@ -48,6 +48,12 @@
   <div>
     {{tableSelection.selected.length}} elements selected
   </div>
+  <mat-paginator
+                 #paginator
+                 [length]="paginatorInfo.length"
+                 [pageSize]="paginatorInfo.pageSize"
+                 [pageSizeOptions]="paginatorInfo.pageSizeOptions">
+  </mat-paginator>
 </div>
 
 
