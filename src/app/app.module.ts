@@ -20,6 +20,7 @@ import { MagicCellComponent } from './magic-cell/magic-cell.component';
 
 import { StoreModule } from '@ngrx/store';
 import { columnsInfoReducer } from './columnsInfo.reducer';
+import { displayedColumnsReducer } from './displayed-columns/displayed-columns.reducer';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { columnsInfoReducer } from './columnsInfo.reducer';
     MatToolbarModule,
     MatTableModule,
     StoreModule.forRoot({
-      columnsInfo: columnsInfoReducer
+      columnsInfo: columnsInfoReducer,
+      displayedColumns: displayedColumnsReducer
     })
   ],
   entryComponents: [DataTableComponent],

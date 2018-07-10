@@ -1,48 +1,52 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="center center" class="table-actions">
-  <button mat-mini-fab (click)="addColumn()">
-    <mat-icon>add</mat-icon>
+  <button mat-button (click)="addColumn()">
+    Add column
   </button>
-  <button mat-mini-fab *ngIf="areRowsSelected()">
-    <mat-icon>edit</mat-icon>
+  <button mat-button *ngIf="areRowsSelected()">
+    Delete column
   </button>
-  <button mat-mini-fab *ngIf="areRowsSelected()" (click)="removeColumn()">
-    <mat-icon>delete</mat-icon>
+
+  <button mat-button (click)="addRow()">
+    Add row
   </button>
+  <!--<button mat-button *ngIf="areRowsSelected()">-->
+    <!--Delete column-->
+  <!--</button>-->
 </mat-toolbar>
 
 <div fxLayout="row">
-  <mat-table #dataTable [dataSource]="dataSource" fxFlex="10">
-    <ng-container matColumnDef="selected">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [checked]="isCheckboxChecked()"
-                      [indeterminate]="isCheckboxIntermediate()">
-        </mat-checkbox>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <mat-checkbox (click)="$event.stopPropagation()"
-                      (change)="$event ? tableSelection.toggle(element) : null"
-                      [checked]="tableSelection.isSelected(element)">
-        </mat-checkbox>
-      </mat-cell>
-    </ng-container>
-    <mat-header-row *matHeaderRowDef="['selected']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['selected'];"></mat-row>
-  </mat-table>
+  <!--<mat-table #dataTable [dataSource]="dataSource" fxFlex="10">-->
+    <!--<ng-container matColumnDef="selected">-->
+      <!--<mat-header-cell *matHeaderCellDef>-->
+        <!--<mat-checkbox (change)="$event ? masterToggle() : null"-->
+                      <!--[checked]="isCheckboxChecked()"-->
+                      <!--[indeterminate]="isCheckboxIntermediate()">-->
+        <!--</mat-checkbox>-->
+      <!--</mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let element">-->
+        <!--<mat-checkbox (click)="$event.stopPropagation()"-->
+                      <!--(change)="$event ? tableSelection.toggle(element) : null"-->
+                      <!--[checked]="tableSelection.isSelected(element)">-->
+        <!--</mat-checkbox>-->
+      <!--</mat-cell>-->
+    <!--</ng-container>-->
+    <!--<mat-header-row *matHeaderRowDef="['selected']"></mat-header-row>-->
+    <!--<mat-row *matRowDef="let row; columns: ['selected'];"></mat-row>-->
+  <!--</mat-table>-->
 
-  <mat-table #dataTable [dataSource]="dataSource" fxFlex="90">
-    <ng-container [matColumnDef]="column.name" *ngFor="let column of columnsInfo.columns">
-      <mat-header-cell *matHeaderCellDef>
-        <app-magic-cell [cellValue]="column.displayName"></app-magic-cell>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <app-magic-cell [cellValue]="element[column.name]"></app-magic-cell>
-      </mat-cell>
-    </ng-container>
+  <!--<mat-table #dataTable [dataSource]="dataSource" fxFlex="90">-->
+    <!--<ng-container [matColumnDef]="column.name" *ngFor="let column of (columnsInfo$ | async)?.columns">-->
+      <!--<mat-header-cell *matHeaderCellDef>-->
+        <!--<app-magic-cell [cellValue]="column.displayName"></app-magic-cell>-->
+      <!--</mat-header-cell>-->
+      <!--<mat-cell *matCellDef="let element">-->
+        <!--<app-magic-cell [cellValue]="element[column.name]"></app-magic-cell>-->
+      <!--</mat-cell>-->
+    <!--</ng-container>-->
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
+    <!--<mat-header-row *matHeaderRowDef="displayedColumns$ | async"></mat-header-row>-->
+    <!--<mat-row *matRowDef="let row; columns: (displayedColumns$ | async);"></mat-row>-->
+  <!--</mat-table>-->
 </div>
 <div fxLayout="row" fxLayout.xs='column' fxLayoutAlign="space-between center">
   <div>
@@ -50,5 +54,11 @@
   </div>
 </div>
 
+<div >
+  {{ columnsInfo$ | async | json }}
+</div>
 
-{{ columnsInfo$ | async | json }}
+<div>
+  {{ displayedColumns$ | async | json }}
+</div>
+

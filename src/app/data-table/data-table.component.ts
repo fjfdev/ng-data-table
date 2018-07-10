@@ -12,6 +12,7 @@ import { Column } from './column.interface';
 
 import { AppStateInterface } from '../app-state.interface';
 import * as ColumnsInfoActions from '../columnsInfo.actions';
+import * as DisplayedColumnsActions from '../displayed-columns/displayed-columns.actions';
 
 @Component({
   selector: 'app-data-table',
@@ -27,9 +28,11 @@ export class DataTableComponent implements OnInit {
   tableSelection;
 
   columnsInfo$: Observable<ColumnsInfo>;
+  displayedColumns$: Observable<string[]>;
 
   constructor(private store: Store<AppStateInterface>) {
     this.columnsInfo$ = this.store.select('columnsInfo');
+    this.displayedColumns$ = this.store.select('displayedColumns');
   }
 
   ngOnInit() {
@@ -106,18 +109,22 @@ export class DataTableComponent implements OnInit {
     return this.tableSelection.hasValue() && !this.areAllRowsSelected();
   }
 
-  addColumn(columnName?: string) {
+  addColumn() {
     // const newIndex = this.columnsInfo.columnLastIndex;
     // const newColumn = {name: 'column${newIndex}', displayName: columnName, parseAs: 'string'};
     // this.columnsInfo.columns.push(newColumn);
     // this.columnsInfo.columnLastIndex++;
-    const newColumn: Column = {name: 'test', displayName: 'test', parseAs: 'string'};
-    this.store.dispatch(new ColumnsInfoActions.AddColumn(newColumn));
+    const newColumn: Column = {name: 'newColumn', displayName: 'New column', parseAs: 'string'};
+    this.store.dispatch(new ColumnsInfoActions.AddColumnInfo(newColumn));
+    this.store.dispatch(new DisplayedColumnsActions.AddDisplayedColumn(newColumn.name));
+  }
+
+  addRow() {
   }
 
   removeColumn(columnIndex?: number) {
     // this.columnsInfo.columns.splice(columnIndex, 1);
-    this.store.dispatch(new ColumnsInfoActions.RemoveColumn('one'));
+    this.store.dispatch(new ColumnsInfoActions.RemoveColumnInfo('one'));
 
     // this.store.dispatch({type: 'REMOVE_COLUMN'});
   }
