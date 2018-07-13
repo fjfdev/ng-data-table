@@ -79,8 +79,14 @@
       true,
       "check-open-brace",
       "check-catch",
-      "check-else",
       "check-whitespace"
+    ],
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "case-insensitive",
+        "named-imports-order": "case-insensitive"
+      }
     ],
     "prefer-const": true,
     "quotemark": [
@@ -112,6 +118,7 @@
       true,
       "check-branch",
       "check-decl",
+      "check-module",
       "check-operator",
       "check-separator",
       "check-type"

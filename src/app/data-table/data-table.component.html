@@ -2,9 +2,10 @@
   <button mat-button (click)="addColumn()">
     Add column
   </button>
-  <button mat-button *ngIf="areRowsSelected()">
-    Delete column
-  </button>
+
+  <!--<button mat-button *ngIf="areRowsSelected()">-->
+    <!--Delete column-->
+  <!--</button>-->
 
   <button mat-button (click)="addRow()">
     Add row
@@ -15,7 +16,7 @@
 </mat-toolbar>
 
 <div fxLayout="row">
-  <!--<mat-table #dataTable [dataSource]="dataSource" fxFlex="10">-->
+  <!--<mat-table #dataTable [dataSource]="dataSource" fxFlex="10">
     <!--<ng-container matColumnDef="selected">-->
       <!--<mat-header-cell *matHeaderCellDef>-->
         <!--<mat-checkbox (change)="$event ? masterToggle() : null"-->
@@ -34,31 +35,31 @@
     <!--<mat-row *matRowDef="let row; columns: ['selected'];"></mat-row>-->
   <!--</mat-table>-->
 
-  <!--<mat-table #dataTable [dataSource]="dataSource" fxFlex="90">-->
-    <!--<ng-container [matColumnDef]="column.name" *ngFor="let column of (columnsInfo$ | async)?.columns">-->
-      <!--<mat-header-cell *matHeaderCellDef>-->
-        <!--<app-magic-cell [cellValue]="column.displayName"></app-magic-cell>-->
-      <!--</mat-header-cell>-->
-      <!--<mat-cell *matCellDef="let element">-->
-        <!--<app-magic-cell [cellValue]="element[column.name]"></app-magic-cell>-->
-      <!--</mat-cell>-->
-    <!--</ng-container>-->
+  <mat-table #dataTable [dataSource]="(dataTable$ | async)?.rows" fxFlex="90">
+    <ng-container [matColumnDef]="column" *ngFor="let column of (dataTable$ | async)?.columns">
+      <mat-header-cell *matHeaderCellDef>
+        <app-magic-cell [cellValue]="column" (valueChanged)="onColumnChanges(column, $event)"></app-magic-cell>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <app-magic-cell [cellValue]="element[column]"></app-magic-cell>
+      </mat-cell>
+    </ng-container>
 
-    <!--<mat-header-row *matHeaderRowDef="displayedColumns$ | async"></mat-header-row>-->
-    <!--<mat-row *matRowDef="let row; columns: (displayedColumns$ | async);"></mat-row>-->
-  <!--</mat-table>-->
+    <mat-header-row *matHeaderRowDef="(dataTable$ | async)?.columns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: (dataTable$ | async)?.columns;"></mat-row>
+  </mat-table>
 </div>
-<div fxLayout="row" fxLayout.xs='column' fxLayoutAlign="space-between center">
-  <div>
-    {{tableSelection.selected.length}} elements selected
-  </div>
-</div>
+<!--<div fxLayout="row" fxLayout.xs='column' fxLayoutAlign="space-between center">-->
+  <!--<div>-->
+    <!--{{tableSelection.selected.length}} elements selected-->
+  <!--</div>-->
+<!--</div>-->
 
-<div >
-  {{ columnsInfo$ | async | json }}
+
+<div>
+   {{ (dataTable$ | async)?.columns | json }}
 </div>
 
 <div>
-  {{ displayedColumns$ | async | json }}
+  {{ (dataTable$ | async)?.rows | json }}
 </div>
-

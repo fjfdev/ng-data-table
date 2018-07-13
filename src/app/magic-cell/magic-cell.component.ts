@@ -1,10 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-enum CellTypes {
-  number,
-  text,
-  date
-}
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-magic-cell',
@@ -13,7 +7,7 @@ enum CellTypes {
 })
 export class MagicCellComponent implements OnInit {
   @Input() cellValue;
-  @Input() cellType: CellTypes;
+  @Output() valueChanged = new EventEmitter<string>();
 
   showEdit: boolean;
   isEditing: boolean;
@@ -37,6 +31,7 @@ export class MagicCellComponent implements OnInit {
 
   acceptEditCell() {
     this.isEditing = false;
+    this.valueChanged.emit(this.cellValue);
   }
 
   closeEditCell() {

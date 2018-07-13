@@ -1,8 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, Injector } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { createCustomElement } from '@angular/elements';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -19,8 +19,7 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { MagicCellComponent } from './magic-cell/magic-cell.component';
 
 import { StoreModule } from '@ngrx/store';
-import { columnsInfoReducer } from './columnsInfo.reducer';
-import { displayedColumnsReducer } from './displayed-columns/displayed-columns.reducer';
+import { dataTableReducer } from './data-table/data-table.reducer';
 
 @NgModule({
   declarations: [
@@ -39,8 +38,7 @@ import { displayedColumnsReducer } from './displayed-columns/displayed-columns.r
     MatToolbarModule,
     MatTableModule,
     StoreModule.forRoot({
-      columnsInfo: columnsInfoReducer,
-      displayedColumns: displayedColumnsReducer
+      dataTable: dataTableReducer,
     })
   ],
   entryComponents: [DataTableComponent],

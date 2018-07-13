@@ -2,6 +2,12 @@
   width: 100%;
 }
 
+.cellValue {
+  min-width: 50px;
+  min-height: 16px;
+  display: inline-block;
+}
+
 .mat-icon-button {
   .mat-icon {
     font-size: 20px;

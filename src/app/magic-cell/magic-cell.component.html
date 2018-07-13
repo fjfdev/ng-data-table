@@ -1,6 +1,6 @@
 <div (mouseenter)="toggleEdit()" (mouseleave)="toggleEdit()">
 
-  <span *ngIf="!isEditing">{{ cellValue }}</span>
+  <span class="cellValue" *ngIf="!isEditing">{{ cellValue }}</span>
   <input *ngIf="isEditing" class="magic-input" placeholder="" type="text" [(ngModel)]="cellValue" [disabled]="!isEditing"/>
 
   <button mat-icon-button
